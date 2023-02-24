@@ -1,12 +1,14 @@
-import React from "react"; 
+import React from "react";
+import { Container} from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { products } from "./Home";
 
-const ProductDetail = (Products) => {
+const ProductDetail = () => {
   const { id } = useParams();
-  const product = Products.find((p) => p.id === parseInt(id));
+  const product = products.find((p) => p.id === parseInt(id));
+  console.log(product);
   
   return (
     <Container>
@@ -24,6 +26,7 @@ const ProductDetail = (Products) => {
   );
 };
 export default ProductDetail;
+
 
 
 

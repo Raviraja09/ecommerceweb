@@ -6,21 +6,25 @@ import { NavLink} from "react-router-dom";
 
 export const products = [
   {
+    id:1,
     name: "Product 1",
     price: 100,
     image: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
   },
   {
+    id:2,
     name: "Product 2",
     price: 50,
     image: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
   },
   {
+    id:3,
     name: "Product 3",
     price: 70,
     image: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
   },
   {
+    id:4,
     name: "Product 4",
     price: 100,
     image: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",

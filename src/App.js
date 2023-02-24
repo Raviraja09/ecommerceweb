@@ -6,6 +6,8 @@ import Store from "./components/Store";
 import Home from "./components/Home";
 import ContactUs from "./components/ContactUs";
 import ProductDetail from "./components/ProductDetail";
+import { products } from "./components/Home";
+
 
 
 const App = () => {
@@ -17,7 +19,8 @@ const App = () => {
         <Route path="/store" element={<Store />} />
         <Route path="/about" element={<About />} />
         <Route path="/ContactUs" element={<ContactUs />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/products/:id" element={<ProductDetail products={products} />} />
+
       </Routes>
     </Container>
   );
