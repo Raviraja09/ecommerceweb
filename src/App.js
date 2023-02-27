@@ -7,6 +7,8 @@ import Home from "./components/Home";
 import ContactUs from "./components/ContactUs";
 import ProductDetail from "./components/ProductDetail";
 import { products } from "./components/Home";
+import Loginpage from "./components/Loginpage";
+
 
 
 
@@ -20,6 +22,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/products/:id" element={<ProductDetail products={products} />} />
+        <Route path="LoginPage" element={<LoginPage/>}/>
 
       </Routes>
     </Container>

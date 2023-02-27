@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
 import CartPage from "./CartPage";
+import { auth } from "./firebase";
+
 import { NavLink} from "react-router-dom";
 
 export const products = [
@@ -42,13 +44,30 @@ const Home = () => {
   const handleCartButtonClick = () => {
     setShowCart(!showCart);
   };
+  const handleLoginButtonClick = () => {
+    setShowLogin(!showLogin);
+  }
+  const handleLogout = () => {
+    auth.signOut();
+  };
+
   return (
       <Container>
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand>The Generics</Navbar.Brand>
-          <Button bsstyle="primary" onClick={handleCartButtonClick}>
-            Cart({cartItems.length})
-          </Button>
+          <Button bsStyle="primary" onClick={handleCartButtonClick}>
+           Cart({cartItems.length})
+           </Button>
+           {auth.currentUser ? (
+            <Button bsStyle="primary" onClick={handleLogout}>
+              Logout
+            </Button>
+          ) : (
+            <Button bsStyle="primary" onClick={handleLoginButtonClick}>
+              Login
+            </Button>
+          )}
+
         </Navbar>
         {showCart && <CartPage items={cartItems} />}
 
@@ -81,7 +100,9 @@ const Home = () => {
       </Container>
   );
 };
+
 export default Home;
+
 
 
 
