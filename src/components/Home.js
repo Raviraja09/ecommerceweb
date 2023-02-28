@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
 import CartPage from "./CartPage";
-import { auth } from "./firebase";
-
 import { NavLink} from "react-router-dom";
-
 export const products = [
   {
     id:1,
@@ -36,6 +33,7 @@ export const products = [
 const Home = () => {
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
+  const [showLogin, setShowLogin] = useState(false); 
 
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
@@ -47,9 +45,6 @@ const Home = () => {
   const handleLoginButtonClick = () => {
     setShowLogin(!showLogin);
   }
-  const handleLogout = () => {
-    auth.signOut();
-  };
 
   return (
       <Container>
@@ -58,15 +53,11 @@ const Home = () => {
           <Button bsStyle="primary" onClick={handleCartButtonClick}>
            Cart({cartItems.length})
            </Button>
-           {auth.currentUser ? (
-            <Button bsStyle="primary" onClick={handleLogout}>
-              Logout
-            </Button>
-          ) : (
+           : (
             <Button bsStyle="primary" onClick={handleLoginButtonClick}>
               Login
             </Button>
-          )}
+          )
 
         </Navbar>
         {showCart && <CartPage items={cartItems} />}
