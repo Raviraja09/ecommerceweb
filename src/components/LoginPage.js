@@ -18,12 +18,12 @@ const LoginPage = () => {
     event.preventDefault();
     const formData = {
       email: email,
-      password: password,
+      password: password
       
     };
 
     try {
-      const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[AIzaSyA85r2CpegHzksRz5PyHVZwav2epZF8c2o]', {
+      const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[AIzaSyA85r2CpegHzksRz5PyHVZwav2epZF8c2o]', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

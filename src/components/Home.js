@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
 import CartPage from "./CartPage";
-import { NavLink} from "react-router-dom";
+import { NavLink,Link} from "react-router-dom";
 export const products = [
   {
     id:1,
@@ -53,11 +53,13 @@ const Home = () => {
           <Button bsStyle="primary" onClick={handleCartButtonClick}>
            Cart({cartItems.length})
            </Button>
-           : (
-            <Button bsStyle="primary" onClick={handleLoginButtonClick}>
-              Login
-            </Button>
-          )
+          <Link to="/LoginPage">
+          <Button variant="primary" onClick={handleLoginButtonClick}>
+               Login
+              </Button>
+          </Link> 
+            
+          
 
         </Navbar>
         {showCart && <CartPage items={cartItems} />}
