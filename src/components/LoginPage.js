@@ -1,57 +1,64 @@
-import React, { useState } from "react";
-import { Container, Form, FormGroup, FormLabel as Label, FormControl as Input, Button } from "react-bootstrap";
+import { useContext, useRef, useState } from "react";
+import { useHistory } from 'react-router';
+import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
+import CartContext from "./CartContext";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const cartCtx = useContext(CartContext);
 
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = async (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
-    const formData = {
-      email: email,
-      password: password
-      
-    };
 
-    try {
-      const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[AIzaSyA85r2CpegHzksRz5PyHVZwav2epZF8c2o]', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)});    
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
 
-      const data = await response.json();
+    setIsLoading(true);
 
-      console.log('Success:', data);
-      
-      setEmail('');
-      setPassword('');
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[AIzaSyA85r2CpegHzksRz5PyHVZwav2epZF8c2o]", {
+      method: "POST",
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        returnSecureToken: true,
+      }),
+      headers: {
+        "content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        setIsLoading(false);
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            let errorMessage = "Authentication failed!";
+            throw new Error(errorMessage);
+          });
+        }
+      })
+      .then((data) => {
+        cartCtx.login(data.idToken);
+        history.replace("/store");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={submitHandler}>
         <FormGroup>
           <Label htmlFor="email">Email</Label>
           <Input
             type="email"
             name="email"
             id="email"
-            value={email}
-            onChange={handleEmailChange}
+            innerRef={emailRef}
           />
         </FormGroup>
         <FormGroup>
@@ -60,12 +67,11 @@ const LoginPage = () => {
             type="password"
             name="password"
             id="password"
-            value={password}
-            onChange={handlePasswordChange}
+            innerRef={passwordRef}
           />
         </FormGroup>
         <Button type="submit" color="primary">Submit</Button>
-        <Button bsStyle="primary" onClick={handleSubmit}>
+        <Button bsStyle="primary" onClick={submitHandler}>
               Login
             </Button>
       </Form>
