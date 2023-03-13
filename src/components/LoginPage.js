@@ -1,16 +1,16 @@
 import { useContext, useRef, useState } from "react";
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import CartContext from "./CartContext";
 
 const LoginPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
   const cartCtx = useContext(CartContext);
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     const enteredEmail = emailRef.current.value;
@@ -18,36 +18,35 @@ const LoginPage = () => {
 
     setIsLoading(true);
 
-    fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[AIzaSyA85r2CpegHzksRz5PyHVZwav2epZF8c2o]", {
-      method: "POST",
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        setIsLoading(false);
-        if (res.ok) {
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            let errorMessage = "Authentication failed!";
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        cartCtx.login(data.idToken);
-        history.replace("/store");
-      })
-      .catch((err) => {
-        alert(err.message);
+    try {
+      const response = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA85r2CpegHzksRz5PyHVZwav2epZF8c2o", {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "content-Type": "application/json",
+        },
       });
+
+      setIsLoading(false);
+
+      if (response.ok) {
+        const data = await response.json();
+        cartCtx.login(data.idToken);
+        navigate('/home');
+      } else {
+        const errorData = await response.json();
+        let errorMessage = "Authentication failed!";
+        throw new Error(errorMessage);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
+
 
   return (
     <Container>
@@ -77,9 +76,7 @@ const LoginPage = () => {
       </Form>
     </Container>
   );
-};
+}
+
 
 export default LoginPage;
-
-
-  

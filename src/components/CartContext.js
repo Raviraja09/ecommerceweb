@@ -1,10 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
-import LoginPage from './LoginPage';
+import React, { createContext, useState } from 'react';
 
-const CartContext = React.createContext();
+const CartContext = createContext({
+  cartItems: [],
+  setCartItems: () => {},
+  token: null,
+  login: () => {},
+});
 
-export const CartContextProvider = () => {
+export const CartContextProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [token, setToken] = useState(null);
 
@@ -12,14 +15,23 @@ export const CartContextProvider = () => {
     setToken(token);
   };
 
+  const value = {
+    cartItems,
+    setCartItems,
+    token,
+    login,
+  };
+
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems, token, login }}>
-      <LoginPage></LoginPage>
+    <CartContext.Provider value={value}>
+      {children}
     </CartContext.Provider>
   );
 };
 
 export default CartContext;
+
+
 
 
 
