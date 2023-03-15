@@ -5,6 +5,7 @@ const CartContext = createContext({
   setCartItems: () => {},
   token: null,
   login: () => {},
+  addItem: () => {},
 });
 
 export const CartContextProvider = ({ children }) => {
@@ -19,17 +20,14 @@ export const CartContextProvider = ({ children }) => {
     cartItems,
     setCartItems,
     token,
-    login,
+    login
   };
 
-  return (
-    <CartContext.Provider value={value}>
-      {children}
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
 export default CartContext;
+
 
 
 

@@ -8,14 +8,16 @@ const CartPage = ({ items }) => {
         {items.map((item) => (
           <li key={item.name}>
             {item.name} - ${item.price}
-            <button style={{ color: "red" }}>Remove</button>
+            <button style={{ color: 'red' }}>Remove</button>
           </li>
         ))}
       </ul>
     </div>
   );
 };
+
 export default CartPage;
+
 
 
 
