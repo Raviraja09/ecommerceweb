@@ -39,7 +39,7 @@ const App = () => {
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/productDetail/:id" element={<ProductDetail products={products} />} />
         <Route path="/LoginPage" element={<LoginPage onLogin={handleLogin} />} />
-        <Route path="/SignupPage" element={<SignupPage onLogin={handleSignUp} />} />
+        <Route path="/SignupPage" element={<SignupPage onSignUp={handleSignUp} />} />
         
       </Routes>
     </Container>
