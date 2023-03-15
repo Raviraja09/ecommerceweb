@@ -64,11 +64,11 @@ const Home = () => {
       <Button variant="primary" className="btn btn-primary mr-2" onClick={handleCartButtonClick}>
   Cart({cartItems.length})
 </Button>
-<Button variant="primary" className="btn btn-primary mr-2">
+<Button variant="primary" className="btn btn-primary mr-2" onclick={handleLoginButtonClick}>
   <Link to="/LoginPage" className="text-white">Login</Link>
 </Button>
 <Button variant="primary" className="btn btn-primary" onClick={handleSignUpButtonClick}>
-  <Link to="/Signup" className="text-white">Signup</Link>
+  <Link to="/SignupPage" className="text-white">Signup</Link>
 </Button>
 
     </Navbar>
