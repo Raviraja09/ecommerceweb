@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { products } from "./Home";
 import CartContext from "./CartContext";
+import NavBar from "./NavBar";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -16,6 +17,8 @@ const ProductDetail = () => {
   };
 
   return (
+    <div>
+      <NavBar></NavBar>
     <Container>
       <Row>
         <Col md={6}>
@@ -29,6 +32,7 @@ const ProductDetail = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 export default ProductDetail;

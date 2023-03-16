@@ -16,16 +16,20 @@ export const CartContextProvider = ({ children }) => {
     setToken(token);
   };
 
+  const addItem = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
   const value = {
     cartItems,
     setCartItems,
     token,
-    login
+    login,
+    addItem,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
-
 export default CartContext;
 
 

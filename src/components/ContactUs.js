@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Container, Form, FormGroup, FormLabel as Label, FormControl as Input, Button } from "react-bootstrap";
+import NavBar from "./NavBar";
 
 const ContactUs = () => {
   const [name, setName] = useState("");
@@ -49,6 +50,8 @@ const ContactUs = () => {
   };
 
   return (
+    <div>
+      <NavBar></NavBar>
     
       <Container>
         <Form onSubmit={handleSubmit}>
@@ -85,6 +88,7 @@ const ContactUs = () => {
           <Button type="submit" color="primary">Submit</Button>
         </Form>
       </Container>
+      </div>
    
   );
 };

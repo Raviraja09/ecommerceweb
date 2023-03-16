@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import CartContext from "./CartContext";
+import NavBar from "./NavBar";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -52,6 +53,10 @@ const SignupPage = () => {
 
 
   return (
+    <div>
+    <NavBar></NavBar>
+   
+    
     <Container>
       <Form onSubmit={submitHandler}>
         <FormGroup>
@@ -86,5 +91,6 @@ const SignupPage = () => {
             </Button>
       </Form>
     </Container>
+    </div>
   );}
    export default SignupPage;
