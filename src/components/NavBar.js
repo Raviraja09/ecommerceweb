@@ -3,7 +3,9 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import CartPage from "./CartPage";
 
-const NavBar = ({ cartItems, handleCartButtonClick, handleLoginButtonClick, handleSignUpButtonClick, showCart }) => {
+
+const NavBar = ({ cartItems, handleCartButtonClick, handleLoginButtonClick, handleSignUpButtonClick, showCart ,logout}) => {
+  
 
   return (
     <>
@@ -21,11 +23,9 @@ const NavBar = ({ cartItems, handleCartButtonClick, handleLoginButtonClick, hand
           <Link to="/SignupPage" className="text-white">
             Signup
           </Link>
-          <Button variant="primary">
-      Logout
-    </Button>
-        
-          
+        </Button>
+        <Button variant="primary" className="btn btn-primary ml-auto" onClick={logout}>
+          Logout
         </Button>
       </Navbar>
       {showCart && <CartPage items={cartItems} />}
@@ -47,5 +47,6 @@ const NavBar = ({ cartItems, handleCartButtonClick, handleLoginButtonClick, hand
 };
 
 export default NavBar;
+
 
 

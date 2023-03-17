@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
-
+import { useHistory } from "react-router-dom";
 
 export const products = [
   {
@@ -36,6 +36,7 @@ const Home = () => {
   const [showCart, setShowCart] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
 
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
@@ -52,6 +53,15 @@ const Home = () => {
   const handleSignUpButtonClick = () => {
     setShowSignUp(!showSignUp);
   };
+  
+  const history = useHistory();
+  
+  const handleLogoutButtonClick = () => {
+    localStorage.removeItem('token');
+    setCartItems([]);
+    setShowLogout(false);
+    history.push('/login');
+  };
 
   return (
     <Container>
@@ -60,6 +70,7 @@ const Home = () => {
         handleCartButtonClick={handleCartButtonClick}
         handleLoginButtonClick={handleLoginButtonClick}
         handleSignUpButtonClick={handleSignUpButtonClick}
+        handleLogoutButtonClick={handleLogoutButtonClick}
         showCart={showCart}
       />
       <Row>
