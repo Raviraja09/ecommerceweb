@@ -2,7 +2,6 @@ import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import CartPage from "./CartPage";
-import { useState } from "react";
 
 const NavBar = ({ cartItems, handleCartButtonClick, handleLoginButtonClick, handleSignUpButtonClick, showCart }) => {
 
@@ -22,6 +21,11 @@ const NavBar = ({ cartItems, handleCartButtonClick, handleLoginButtonClick, hand
           <Link to="/SignupPage" className="text-white">
             Signup
           </Link>
+          <Button variant="primary">
+      Logout
+    </Button>
+        
+          
         </Button>
       </Navbar>
       {showCart && <CartPage items={cartItems} />}

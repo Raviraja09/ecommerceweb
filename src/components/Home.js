@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
-import CartPage from "./CartPage";
+
 
 export const products = [
   {
